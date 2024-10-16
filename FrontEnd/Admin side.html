@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+        }
+
+        .sidebar a {
+            color: #fff;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .custom-switch .custom-control-label::before {
+            border-radius: 50%;
+            background-color: #ccc;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-control-input:checked~.custom-control-label::before {
+            background-color: #007bff;
+        }
+
+        .custom-control-label::after {
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            transition: transform 0.2s;
+        }
+
+        .custom-control-input:checked~.custom-control-label::after {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar p-3">
+            <h4 class="text-white">Admin Panel</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="navigate('dashboard')">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="navigate('notifications')">Notifications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="navigate('users')">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="navigate('settings')">Settings</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content flex-grow-1">
+            <div id="main-content">
+                <h1>Welcome to the Admin Dashboard</h1>
+                <p>Select an option from the sidebar to get started.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for routing -->
+    <script>
+        function navigate(page) {
+            let content = '';
+
+            switch (page) {
+                case 'dashboard':
+                    content = `
+                        <h1>Dashboard</h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">User Statistics</h5>
+                                        <p class="card-text">Total Users: 120</p>
+                                        <p class="card-text">Active Users: 95</p>
+                                        <p class="card-text">New Registrations: 5 this week</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">System Performance</h5>
+                                        <p class="card-text">Server Status: Online</p>
+                                        <p class="card-text">Uptime: 99.9%</p>
+                                        <p class="card-text">Response Time: 200ms</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5>Recent Activity</h5>
+                        <ul class="list-group mb-4">
+                            <li class="list-group-item">User John Doe logged in.</li>
+                            <li class="list-group-item">User Jane Smith updated their profile.</li>
+                            <li class="list-group-item">System maintenance completed.</li>
+                        </ul>
+                    `;
+                    break;
+                case 'notifications':
+                    content = `
+                        <h2 class="h3 mb-4 page-title">Notifications</h2>
+                        <h5 class="mb-0 mt-5">Notification Settings</h5>
+                        <p>Select the notifications you would like to receive</p>
+                        <hr class="my-4" />
+
+                        <strong class="mb-0">Security</strong>
+                        <p>Control which security alerts you will be notified about.</p>
+
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Unusual Activity Notifications</strong>
+                                        <p class="text-muted mb-0">Get notified about any unusual activities on your account.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert1" checked />
+                                            <label class="custom-control-label" for="alert1"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Unauthorized Financial Activity</strong>
+                                        <p class="text-muted mb-0">Receive alerts regarding any unauthorized financial transactions.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert2" />
+                                            <label class="custom-control-label" for="alert2"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <strong class="mb-0">System</strong>
+                        <p>Please enable the system alerts you would like to receive.</p>
+
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify Me About New Features and Updates</strong>
+                                        <p class="text-muted mb-0">Stay informed about new features and updates to our services.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert3" checked />
+                                            <label class="custom-control-label" for="alert3"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify Me by Email for Latest News</strong>
+                                        <p class="text-muted mb-0">Receive the latest news and updates via email.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert4" checked />
+                                            <label class="custom-control-label" for="alert4"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify Me About Tips on Using My Account</strong>
+                                        <p class="text-muted mb-0">Get helpful tips and advice on how to use your account effectively.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="alert5" />
+                                            <label class="custom-control-label" for="alert5"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'users':
+                    content = `
+                        <h2 class="h3 mb-4 page-title">Users Management</h2>
+                        <button class="btn btn-primary mb-3" onclick="addUser()">Add User</button>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-table">
+                                <tr>
+                                    <td>1</td>
+                                    <td>John Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>Admin</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" onclick="editUser(1)">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteUser(1)">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jane Smith</td>
+                                    <td>jane@example.com</td>
+                                    <td>User</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm" onclick="editUser(2)">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteUser(2)">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+                case 'settings':
+                    content = `
+                        <h2 class="h3 mb-4 page-title">Settings</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="siteTitle">Site Title</label>
+                                <input type="text" class="form-control" id="siteTitle" placeholder="Enter site title">
+                            </div>
+                            <div class="form-group">
+                                <label for="themeSelect">Select Theme</label>
+                                <select class="form-control" id="themeSelect">
+                                    <option>Light</option>
+                                    <option>Dark</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="privacySelect">Privacy Settings</label>
+                                <select class="form-control" id="privacySelect">
+                                    <option>Public</option>
+                                    <option>Private</option>
+                                    <option>Restricted</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Settings</button>
+                        </form>
+                    `;
+                    break;
+                default:
+                    content = `<h1>Welcome</h1><p>Select an option from the sidebar to get started.</p>`;
+            }
+
+            document.getElementById('main-content').innerHTML = content;
+        }
+
+        function addUser() {
+            alert("Add User functionality to be implemented.");
+        }
+
+        function editUser(id) {
+            alert("Edit User functionality to be implemented for User ID: " + id);
+        }
+
+        function deleteUser(id) {
+            alert("Delete User functionality to be implemented for User ID: " + id);
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
